@@ -18,7 +18,7 @@ void No1_adaptiveRK4() {
 
 	// Solve with 3 different time steps
 	StaticTimer::start();
-	const auto [t, y, err, tau] = odesolve_adaptiveRK4(oscillating_equation::odeproblem, oscillating_equation::epsilon);
+	const auto [t, y, err, tau] = odesolve_adaptiveRK4(variant_equation::odeproblem1, variant_equation::epsilon);
 	StaticTimer::end();
 
 	// Save
@@ -31,10 +31,10 @@ void No1_adaptiveRK4() {
 	file
 		<< '\n' << "Problem" << '\n' << "Adaptive test equation"
 		<< '\n' << "Method" << '\n' << "Adaptive 4th order Runge-Kutta method"
-		<< '\n' << "Time interval" << '\n' << oscillating_equation::odeproblem.timeInterval
-		<< '\n' << "Initial time step" << '\n' << oscillating_equation::odeproblem.tau
-		<< '\n' << "y0" << '\n' << oscillating_equation::odeproblem.y0.format(INLINE)
-		<< '\n' << "Epsilon" << '\n' << oscillating_equation::epsilon;
+		<< '\n' << "Time interval" << '\n' << variant_equation::odeproblem1.timeInterval
+		<< '\n' << "Initial time step" << '\n' << variant_equation::odeproblem1.tau
+		<< '\n' << "y0" << '\n' << variant_equation::odeproblem1.y0.format(INLINE)
+		<< '\n' << "Epsilon" << '\n' << variant_equation::epsilon;
 }
 
 void No1_RK4() {
@@ -74,8 +74,10 @@ void No1_RK2() {
 		<< STARTER << "Running 2nd order Runge-Kutta method...\n";
 
 	// Solve with 3 different time steps
+	using namespace variant_equation;
+
 	StaticTimer::start();
-	const auto [t1, y1] = odesolve_RK2(variant_equation::odeproblem1);
+	const auto [t1, y1] = odesolve_RK2({ &f, variant_equation::y0, timeInterval, tau1 });
 	const auto [t2, y2] = odesolve_RK2(variant_equation::odeproblem2);
 	const auto [t3, y3] = odesolve_RK2(variant_equation::odeproblem3);
 	StaticTimer::end();

@@ -1,10 +1,25 @@
-# Numerical methods 5 / Newton's method
+# ODE Solvers
 
-MISSING
+A lab done as part of a course in numeric methods. Contains naive implementations of the following ODE solvers:
+
+* Explicit Euler's method
+
+* Implicit Euler's method
+
+* Symmetric Euler's method
+
+* 2nd order Runge-Kutta method
+
+* 4th order Runge-Kutta method
+
+* 4th order Runge-Kutta method (with adaptive step size)
+
+* 4th order predictor-corrector method
+
+* 4th order Adams method (linear multistep method)
 
 ## Compilation
 
-* Recommended compiler: MSVC v142
 * Requires C++17 support
 
 ## Dependencies
@@ -15,7 +30,8 @@ MISSING
 
 MISSING
 
-## Version history
+* 00.01
+    ** Final release
 
 MISSING
 

@@ -6,22 +6,38 @@
 
 // ¹1 - variant (2) system
 namespace variant_equation {
-	constexpr double a = 1.5;
-	constexpr double b = -0.3;
-	constexpr double delta = 0.01;
-	constexpr double F = 0.05;
-	inline double v = std::sqrt(a) + 0.15; // BECAUSE std::sqrt() IS STILL NOT CONSTEXPR
+	constexpr double a = 0.2;
+	constexpr double mu = 0.04;
+	constexpr double omega = 0.5;
+	constexpr double nu = 0.0015;
+
+	inline double H(const Vector &u) {
+		return (u(0) * u(0) + u(1) * u(1)) * (u(0) * u(0) + u(1) * u(1)) - 2 * a * a * (u(0) * u(0) - u(1) * u(1));
+	}
+
+	inline double Hx(const Vector &u) {
+		return -4 * a * a * u(0) + 4 * u(0) * (u(0) * u(0) + u(1) * u(1));
+	}
+
+	inline double Hy(const Vector &u) {
+		return 4 * a * a * u(1) + 4 * u(1) * (u(0) * u(0) + u(1) * u(1));
+	}
 
 	inline Vector f(double t, const Vector &u) {
-		return Vector{ { u(1), F * cos(v * t) - 2. * delta * u(1) - a * u(0) - b * cube(u(0)) } };
+		return Vector{ {
+				Hy(u) - mu * H(u) * Hx(u) + nu * u(1) * sin(omega * t),
+				-Hx(u) - mu * H(u) * Hy(u) + nu * u(1) * sin(omega * t)
+			} };
 	}
 
 	inline auto y0 = Vector{ { 0.1, 0.1 } };
 
-	constexpr double timeInterval = 10;
+	constexpr double timeInterval = 50;
 	constexpr double tau1 = 1e-2;
 	constexpr double tau2 = 2e-2;
 	constexpr double tau3 = 4e-2;
+
+	constexpr double epsilon = 1e-8;
 
 	inline ODEProblem odeproblem1{ &f, y0, timeInterval, tau1 };
 	inline ODEProblem odeproblem2{ &f, y0, timeInterval, tau2 };
@@ -59,26 +75,15 @@ namespace variant13_equation {
 
 namespace oscillating_equation {
 	inline Vector f(double t, const Vector &u) {
-		// sin * sin
-		/*return Vector{ {
-				1.,
-				40. * cos(40. * t) * std::pow(sin(0.4 * t), 20) + 1.2 * cos(0.4 * t) * std::pow(sin(0.4 * t), 19) * sin(40. * t)
-			} };*/
-		// (5 - t)^10
-		/*return Vector{ {
-				1.,
-				10. * std::pow(t - 5, 9)
-			} };*/
-		// sin
 		return Vector{ {
 				1.,
-				0.1 * cos(0.1 * t)
+				10. * cos(10. * t)
 		} };
 	}
 
 	inline auto y0 = Vector{ { 0., 0. } };
 
-	constexpr double timeInterval = 20 * PI;
+	constexpr double timeInterval = PI;
 	constexpr double tau = 1e-2;
 
 	inline ODEProblem odeproblem{ &f, y0, timeInterval, tau };
