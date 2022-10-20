@@ -34,7 +34,7 @@ All solutions are saved to "[output]/" by default, where they can be visualzed b
 
 ## Visualization examples
 
-Harmonic equation solution can be used to show how some methods affect total energy of a system. Here, implicit Euler's method shows its tendency to loose energy over time, while symmetric Euler is consercative:
+Harmonic equation solution can be used to show how some methods affect total energy of a system. Here, implicit Euler's method shows its tendency to loose energy over time, while symmetric Euler is conservative:
 
 <img src="images/example_implicit_euler.png" width=40% height=40%>
 
@@ -44,7 +44,7 @@ By solving a problem for a small time interval on a given grid one can obtain ph
 
 <img src="images/example_phase_portrait.png" width=40% height=40%>
 
-Since there is no inherent limitation of system dimensionality, same can be done in 3D:
+Since there is no inherent limitation of system dimensionality, the same can be done in 3D:
 
 <img src="images/example_phase_portrait_3d.png" width=40% height=40%>
 
