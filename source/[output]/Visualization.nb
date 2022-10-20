@@ -1,0 +1,1399 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     55838,       1391]
+NotebookOptionsPosition[     55438,       1376]
+NotebookOutlinePosition[     55881,       1393]
+CellTagsIndexPosition[     55838,       1390]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"labelFontSize", "=", "12"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"axesFontSize", "=", "16"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Parse1", "[", "name_", "]"}], ":=", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", "name"}], "}"}]}], ",", 
+     RowBox[{"{", "Real", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Parse2", "[", "name_", "]"}], ":=", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", "name"}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Real", ",", "Real"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Parse3", "[", "name_", "]"}], ":=", 
+   RowBox[{"ReadList", "[", 
+    RowBox[{
+     RowBox[{"FileNameJoin", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", "name"}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Real", ",", "Real", ",", "Real"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ParseProblem", "[", "name_", "]"}], ":=", 
+    RowBox[{"ReadList", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"NotebookDirectory", "[", "]"}], ",", "name"}], "}"}]}], ",", 
+      RowBox[{"{", "String", "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ShowInfo", "[", "list_", "]"}], ":=", 
+    RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"First", "@", 
+           RowBox[{
+           "list", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}]}], 
+          ",", 
+          RowBox[{"First", "@", 
+           RowBox[{"list", "\[LeftDoubleBracket]", 
+            RowBox[{"k", "+", "1"}], "\[RightDoubleBracket]"}]}]}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", 
+          RowBox[{
+           RowBox[{"Length", "@", "list"}], "-", "1"}], ",", "2"}], "}"}]}], 
+       "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Frame", "\[Rule]", "All"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PlotPhaseTrajectory", "[", "points_", "]"}], ":=", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"points", ",", "\[IndentingNewLine]", 
+     RowBox[{"FrameStyle", "\[Rule]", "Black"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"TicksStyle", "\[Rule]", "Black"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"LabelStyle", "\[Rule]", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"Black", ",", 
+        RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", "labelFontSize"}],
+        "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{
+         "\"\<\!\(\*SubscriptBox[\(u\), \(1\)]\)\>\"", ",", "axesFontSize"}], 
+         "]"}], ",", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+         "\"\<\!\(\*SubscriptBox[\(u\), \(2\)]\)\>\"", ",", "axesFontSize"}], 
+         "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Epilog", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Blue", ",", " ", 
+        RowBox[{"PointSize", "@", "0.015"}], ",", 
+        RowBox[{"Point", "@", 
+         RowBox[{"First", "@", "\[CapitalXi]y"}]}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{"\"\<\!\(\*SubscriptBox[\(y\), \(0\)]\)\>\"", ",", 
+          RowBox[{"First", "@", "\[CapitalXi]y"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "2"}]}], "}"}]}], "]"}]}], "}"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PhasePlot", "[", 
+     RowBox[{"infolist_", ",", "plotpoints_"}], "]"}], ":=", 
+    RowBox[{"Column", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ShowInfo", "@", "infolist"}], ",", 
+        RowBox[{"PlotPhaseTrajectory", "@", "plotpoints"}]}], "}"}], ",", 
+      "Center"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"\:21161", " ", "-", " ", 
+     RowBox[{
+     "\:0417\:0430\:0434\:0430\:043d\:0438\:0435", " ", 
+      "\:0432\:0430\:0440\:0438\:0430\:043d\:0442\:0430"}]}], ",", " ", 
+    RowBox[{
+    "\:043f\:043e\:0440\:044f\:0434\:043a\:0438", " ", 
+     "\:0441\:0445\:043e\:0434\:0438\:043c\:043e\:0441\:0442\:0438", " ", 
+     "\:043c\:0435\:0442\:043e\:0434\:043e\:0432"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Framed", "@", 
+   RowBox[{"Framed", "@", "\"\<\:0427\:0430\:0441\:0442\:044c 1\>\""}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "\:041c\:0435\:0442\:043e\:0434", " ", "\:0420\:0443\:043d\:0433\:0435"}],
+     "-", 
+    RowBox[{"\:041a\:0443\:0442\:0442\:044b", " ", "4"}], "-", 
+    RowBox[{
+    "\:0433\:043e", " ", "\:043f\:043e\:0440\:044f\:0434\:043a\:0430", " ", 
+     "\:0441", " ", 
+     "\:0430\:0434\:0430\:043f\:0442\:0438\:0432\:043d\:044b\:043c", " ", 
+     "\:0448\:0430\:0433\:043e\:043c"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", "\"\<[adaptiveRK4][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", "\"\<[adaptiveRK4][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]r", "=", 
+   RowBox[{"Flatten", "@", 
+    RowBox[{
+    "Parse1", "@", "\"\<[adaptiveRK4][variant_equation](err).dat\>\""}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]\[Tau]", "=", 
+   RowBox[{"Flatten", "@", 
+    RowBox[{
+    "Parse1", "@", "\"\<[adaptiveRK4][variant_equation](tau).dat\>\""}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[adaptiveRK4][variant_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ShowInfo", "@", "\[CapitalXi]problem"}], "\[IndentingNewLine]", 
+     "points"}], "=", 
+    RowBox[{"Transpose", "@", 
+     RowBox[{"{", 
+      RowBox[{"\[CapitalXi]t", ",", "\[CapitalXi]y"}], "}"}]}]}], "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"points", ",", "\[IndentingNewLine]", 
+     RowBox[{"FrameStyle", "\[Rule]", "Black"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"TicksStyle", "\[Rule]", "Black"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"LabelStyle", "\[Rule]", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"Black", ",", 
+        RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", "labelFontSize"}],
+        "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{
+         "\"\<\!\(\*SubscriptBox[\(u\), \(1\)]\)\>\"", ",", "axesFontSize"}], 
+         "]"}], ",", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+         "\"\<\!\(\*SubscriptBox[\(u\), \(2\)]\)\>\"", ",", "axesFontSize"}], 
+         "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Epilog", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Blue", ",", " ", 
+        RowBox[{"PointSize", "@", "0.015"}], ",", 
+        RowBox[{"Point", "@", 
+         RowBox[{"First", "@", "\[CapitalXi]y"}]}], ",", 
+        RowBox[{"Text", "[", 
+         RowBox[{"\"\<\!\(\*SubscriptBox[\(y\), \(0\)]\)\>\"", ",", 
+          RowBox[{"First", "@", "\[CapitalXi]y"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "2"}]}], "}"}]}], "]"}]}], "}"}]}]}], 
+    "\[IndentingNewLine]", "]"}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon", "=", 
+   SuperscriptBox["10", 
+    RowBox[{"-", "9"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Column", "[", 
+   RowBox[{
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ListStepPlot", "[", 
+       RowBox[{"\[CapitalXi]r", ",", "\[IndentingNewLine]", 
+        RowBox[{"FrameStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"TicksStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", 
+           "labelFontSize"}], "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<n\>\"", ",", "axesFontSize"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<err\>\"", ",", "axesFontSize"}], "]"}]}], "}"}]}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ScalingFunctions", "\[Rule]", "\"\<Log10\>\""}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"Automatic", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Min", "@", "\[CapitalXi]r"}], ",", 
+             RowBox[{"Max", "@", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Max", "@", "\[CapitalXi]r"}], ",", 
+                RowBox[{"10", "epsilon"}]}], "}"}]}]}], "}"}]}], "}"}]}], ",",
+         "\[IndentingNewLine]", 
+        RowBox[{"Epilog", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"Purple", ",", 
+           RowBox[{"Line", "@", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"1", ",", 
+                RowBox[{"Log10", "@", "epsilon"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Length", "@", "\[CapitalXi]r"}], ",", 
+                RowBox[{"Log10", "@", "epsilon"}]}], "}"}]}], "}"}]}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{"\"\<\[CurlyEpsilon]\>\"", ",", 
+             RowBox[{"{", 
+              RowBox[{"10", ",", 
+               RowBox[{"Log10", "@", "epsilon"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", 
+               RowBox[{"-", "2"}]}], "}"}]}], "]"}]}], "}"}]}]}], 
+       "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"ListStepPlot", "[", 
+       RowBox[{"\[CapitalXi]\[Tau]", ",", "\[IndentingNewLine]", 
+        RowBox[{"FrameStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"TicksStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", 
+           "labelFontSize"}], "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<n\>\"", ",", "axesFontSize"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<\[Tau]\>\"", ",", "axesFontSize"}], "]"}]}], "}"}]}],
+         ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ScalingFunctions", "\[Rule]", "\"\<Log2\>\""}]}], 
+       "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+    RowBox[{"Alignment", "\[Rule]", "Center"}]}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "\:041c\:0435\:0442\:043e\:0434", " ", "\:0420\:0443\:043d\:0433\:0435"}],
+     "-", 
+    RowBox[{"\:041a\:0443\:0442\:0442\:044b", " ", "4"}], "-", 
+    RowBox[{
+    "\:0433\:043e", " ", "\:043f\:043e\:0440\:044f\:0434\:043a\:0430"}]}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{"Parse1", "@", "\"\<[RK4][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{"Parse2", "@", "\"\<[RK4][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", "\"\<[RK4][variant_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "\:041c\:0435\:0442\:043e\:0434", " ", "\:0420\:0443\:043d\:0433\:0435"}],
+     "-", 
+    RowBox[{"\:041a\:0443\:0442\:0442\:044b", " ", "2"}], "-", 
+    RowBox[{
+    "\:0433\:043e", " ", "\:043f\:043e\:0440\:044f\:0434\:043a\:0430"}]}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{"Parse1", "@", "\"\<[RK2][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{"Parse2", "@", "\"\<[RK2][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", "\"\<[RK2][variant_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "\:041c\:0435\:0442\:043e\:0434", " ", 
+     "\:0410\:0434\:0430\:043c\:0441\:0430"}], "-", 
+    RowBox[{"\:0411\:0430\:0448\:0444\:043e\:0440\:0442\:0430", " ", "4"}], 
+    "-", 
+    RowBox[{
+    "\:0433\:043e", " ", "\:043f\:043e\:0440\:044f\:0434\:043a\:0430"}]}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{"Parse1", "@", "\"\<[Adams4][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{"Parse2", "@", "\"\<[Adams4][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", "\"\<[Adams4][variant_equation](problem).dat\>\""}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "\:041c\:0435\:0442\:043e\:0434", " ", 
+     "\:041f\:0440\:0435\:0434\:0438\:043a\:0442\:043e\:0440"}], "-", 
+    RowBox[{
+    "\:043a\:043e\:0440\:0440\:0435\:043a\:0442\:043e\:0440", " ", "4"}], "-", 
+    RowBox[{
+    "\:0433\:043e", " ", "\:043f\:043e\:0440\:044f\:0434\:043a\:0430"}]}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", 
+    "\"\<[PredictorCorrector4][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", 
+    "\"\<[PredictorCorrector4][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[PredictorCorrector4][variant_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "\:042f\:0432\:043d\:044b\:0439", " ", "\:043c\:0435\:0442\:043e\:0434", 
+    " ", "\:042d\:0439\:043b\:0435\:0440\:0430"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", "\"\<[explicit_euler][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", "\"\<[explicit_euler][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[explicit_euler][variant_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "\:041d\:0435\:044f\:0432\:043d\:044b\:0439", " ", 
+    "\:043c\:0435\:0442\:043e\:0434", " ", 
+    "\:042d\:0439\:043b\:0435\:0440\:0430"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", "\"\<[implicit_euler][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", "\"\<[implicit_euler][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[implicit_euler][variant_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "\:0421\:0438\:043c\:043c\:0435\:0442\:0440\:0438\:0447\:043d\:044b\:0439",
+     " ", "\:043c\:0435\:0442\:043e\:0434", " ", 
+    "\:042d\:0439\:043b\:0435\:0440\:0430"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", "\"\<[symmetric_euler][variant_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", "\"\<[symmetric_euler][variant_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[symmetric_euler][variant_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"\:21162", " ", "-", " ", 
+     RowBox[{
+     "\:0423\:0440\:0430\:0432\:043d\:0435\:043d\:0438\:0435", " ", 
+      "\:043a\:043e\:043b\:0435\:0431\:0430\:043d\:0438\:0439"}]}], ",", " ", 
+    RowBox[{
+    "\:043a\:043e\:043d\:0441\:0435\:0440\:0432\:0430\:0442\:0438\:0432\:043d\
+\:043e\:0441\:0442\:044c", " ", 
+     "\:043c\:0435\:0442\:043e\:0434\:043e\:0432"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Framed", "@", 
+   RowBox[{"Framed", "@", "\"\<\:0427\:0430\:0441\:0442\:044c 2\>\""}]}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "\:042f\:0432\:043d\:044b\:0439", " ", "\:043c\:0435\:0442\:043e\:0434", 
+    " ", "\:042d\:0439\:043b\:0435\:0440\:0430"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", "\"\<[explicit_euler][spring_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", "\"\<[explicit_euler][spring_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[explicit_euler][spring_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", " ", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "\:041d\:0435\:044f\:0432\:043d\:044b\:0439", " ", 
+    "\:043c\:0435\:0442\:043e\:0434", " ", 
+    "\:042d\:0439\:043b\:0435\:0440\:0430"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", "\"\<[implicit_euler][spring_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", "\"\<[implicit_euler][spring_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[implicit_euler][spring_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "\:0421\:0438\:043c\:043c\:0435\:0442\:0440\:0438\:0447\:043d\:0430\:044f",
+     " ", "\:0441\:0445\:0435\:043c\:0430"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{
+   "Parse1", "@", "\"\<[symmetric_euler][spring_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{
+   "Parse2", "@", "\"\<[symmetric_euler][spring_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", 
+    "\"\<[symmetric_euler][spring_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"\:0420\:0443\:043d\:0433\:0435", "-", 
+    RowBox[{"\:041a\:0443\:0442\:0442\:0430", " ", 
+     RowBox[{"(", "4", ")"}]}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{"Parse1", "@", "\"\<[RK4][spring_equation](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{"Parse2", "@", "\"\<[RK4][spring_equation](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{
+   "ParseProblem", "@", "\"\<[RK4][spring_equation](problem).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhasePlot", "[", 
+   RowBox[{"\[CapitalXi]problem", ",", "\[CapitalXi]y"}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"\:21163", " ", "-", " ", 
+    RowBox[{
+    "\:0424\:0430\:0437\:043e\:0432\:044b\:0435", " ", 
+     "\:043f\:043e\:0440\:0442\:0440\:0435\:0442\:044b", " ", 
+     "\:0434\:043b\:044f", " ", "\:0437\:0430\:0434\:0430\:0447", " ", 
+     "\:0438\:0437", " ", 
+     "\:043f\:0440\:0438\:043c\:0435\:0440\:043e\:0432"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"colorData", "=", 
+    RowBox[{"ColorData", "[", "\"\<TemperatureMap\>\"", "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"\:0417\:0430\:0434\:0430\:0447\:0430", " ", "1"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{"Parse1", "@", "\"\<[phase_portrait_1](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{"Parse2", "@", "\"\<[phase_portrait_1](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]problem", "=", 
+   RowBox[{"ParseProblem", "@", "\"\<[phase_portrait_1](problem).dat\>\""}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ShowInfo", "@", "\[CapitalXi]problem"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]xmin", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "6", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]xmax", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "8", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]ymin", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "10", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]ymax", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "12", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]Nx", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "14", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]Ny", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "16", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]total", "=", 
+   RowBox[{"\[CapitalPi]Nx", "*", "\[CapitalPi]Ny"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]segsize", "=", 
+   RowBox[{
+    RowBox[{"Length", "@", "\[CapitalXi]t"}], "/", "\[CapitalPi]total"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"EPS", "=", "0.2"}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"firstPoints", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+     "\[CapitalXi]y", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", "\[CapitalPi]segsize"}],
+       "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"middlePoints", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"\[CapitalXi]y", "\[LeftDoubleBracket]", 
+      RowBox[{"k", ";;", 
+       RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "1"}]}], 
+      "\[RightDoubleBracket]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", "\[CapitalPi]segsize"}],
+       "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"middleColors", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"colorData", "[", 
+        RowBox[{"i", "/", 
+         RowBox[{"Length", "@", 
+          RowBox[{
+          "middlePoints", "\[LeftDoubleBracket]", "k", 
+           "\[RightDoubleBracket]"}]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "@", 
+          RowBox[{
+          "middlePoints", "\[LeftDoubleBracket]", "k", 
+           "\[RightDoubleBracket]"}]}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "middlePoints"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lastPoints", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"\[CapitalXi]y", "\[LeftDoubleBracket]", 
+       RowBox[{
+        RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "2"}], ";;", 
+        RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "1"}]}], 
+       "\[RightDoubleBracket]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "1", ",", 
+        RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", 
+        "\[CapitalPi]segsize"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Framed", "@", 
+  "\"\<\:0417\:0430\:0434\:0430\:0447\:0430 1, \:0444\:0430\:0437\:043e\:0432\
+\:044b\:0439 \:043f\:043e\:0440\:0442\:0440\:0435\:0442\>\""}], "\
+\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Column", "[", 
+   RowBox[{
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ShowInfo", "@", "\[CapitalXi]problem"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"\[CapitalXi]y", ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\[CapitalPi]xmin", "-", "EPS"}], ",", 
+             RowBox[{"\[CapitalPi]xmax", "+", "EPS"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\[CapitalPi]ymin", "-", "EPS"}], ",", 
+             RowBox[{"\[CapitalPi]ymax", "+", "EPS"}]}], "}"}]}], "}"}]}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"FrameStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"TicksStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", 
+           "labelFontSize"}], "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotStyle", "\[Rule]", "Transparent"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<\!\(\*SubscriptBox[\(u\), \(1\)]\)\>\"", ",", 
+             "axesFontSize"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<\!\(\*SubscriptBox[\(u\), \(2\)]\)\>\"", ",", 
+             "axesFontSize"}], "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Prolog", "\[Rule]", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"colorData", "[", "0", "]"}], ",", " ", 
+           RowBox[{"PointSize", "@", "0.006"}], ",", 
+           RowBox[{"Point", "@", "firstPoints"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Thickness", "@", "0.002"}], ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"middlePoints", ",", 
+             RowBox[{"VertexColors", "\[Rule]", "middleColors"}]}], "]"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"colorData", "[", "1", "]"}], ",", 
+           RowBox[{"Arrowheads", "@", "0.015"}], ",", 
+           RowBox[{"Arrow", "@", "lastPoints"}]}], "}"}]}]}], 
+       "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+    RowBox[{"Alignment", "\[Rule]", "Center"}]}], "\[IndentingNewLine]", 
+   "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"\:0417\:0430\:0434\:0430\:0447\:0430", " ", "2"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{"Parse1", "@", "\"\<[phase_portrait_2](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{"Parse2", "@", "\"\<[phase_portrait_2](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalXi]problem", "=", 
+    RowBox[{
+    "ParseProblem", "@", "\"\<[phase_portrait_2](problem).dat\>\""}]}], ";"}],
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]xmin", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "6", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]xmax", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "8", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]ymin", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "10", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]ymax", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "12", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]Nx", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "14", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]Ny", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "16", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]total", "=", 
+   RowBox[{"\[CapitalPi]Nx", "*", "\[CapitalPi]Ny"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]segsize", "=", 
+   RowBox[{
+    RowBox[{"Length", "@", "\[CapitalXi]t"}], "/", "\[CapitalPi]total"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"EPS", "=", "0.2"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"firstPoints", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+     "\[CapitalXi]y", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", "\[CapitalPi]segsize"}],
+       "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"middlePoints", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"\[CapitalXi]y", "\[LeftDoubleBracket]", 
+      RowBox[{"k", ";;", 
+       RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "1"}]}], 
+      "\[RightDoubleBracket]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", "\[CapitalPi]segsize"}],
+       "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"middleColors", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"colorData", "[", 
+        RowBox[{"i", "/", 
+         RowBox[{"Length", "@", 
+          RowBox[{
+          "middlePoints", "\[LeftDoubleBracket]", "k", 
+           "\[RightDoubleBracket]"}]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "@", 
+          RowBox[{
+          "middlePoints", "\[LeftDoubleBracket]", "k", 
+           "\[RightDoubleBracket]"}]}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "middlePoints"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lastPoints", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"\[CapitalXi]y", "\[LeftDoubleBracket]", 
+       RowBox[{
+        RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "2"}], ";;", 
+        RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "1"}]}], 
+       "\[RightDoubleBracket]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "1", ",", 
+        RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", 
+        "\[CapitalPi]segsize"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Framed", "@", 
+  "\"\<\:0417\:0430\:0434\:0430\:0447\:0430 2, \:0444\:0430\:0437\:043e\:0432\
+\:044b\:0439 \:043f\:043e\:0440\:0442\:0440\:0435\:0442\>\""}], "\
+\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Column", "[", 
+   RowBox[{
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ShowInfo", "@", "\[CapitalXi]problem"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"\[CapitalXi]y", ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\[CapitalPi]xmin", "-", "EPS"}], ",", 
+             RowBox[{"\[CapitalPi]xmax", "+", "EPS"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\[CapitalPi]ymin", "-", "EPS"}], ",", 
+             RowBox[{"\[CapitalPi]ymax", "+", "EPS"}]}], "}"}]}], "}"}]}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"FrameStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"TicksStyle", "\[Rule]", "Black"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", 
+           "labelFontSize"}], "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"PlotStyle", "\[Rule]", "Transparent"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<\!\(\*SubscriptBox[\(u\), \(1\)]\)\>\"", ",", 
+             "axesFontSize"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{
+            "\"\<\!\(\*SubscriptBox[\(u\), \(2\)]\)\>\"", ",", 
+             "axesFontSize"}], "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Prolog", "\[Rule]", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"colorData", "[", "0", "]"}], ",", " ", 
+           RowBox[{"PointSize", "@", "0.006"}], ",", 
+           RowBox[{"Point", "@", "firstPoints"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Thickness", "@", "0.002"}], ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"middlePoints", ",", 
+             RowBox[{"VertexColors", "\[Rule]", "middleColors"}]}], "]"}], 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{"colorData", "[", "1", "]"}], ",", 
+           RowBox[{"Arrowheads", "@", "0.015"}], ",", 
+           RowBox[{"Arrow", "@", "lastPoints"}]}], "}"}]}]}], 
+       "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}], ",", 
+    RowBox[{"Alignment", "\[Rule]", "Center"}]}], "\[IndentingNewLine]", 
+   "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"\:0417\:0430\:0434\:0430\:0447\:0430", " ", "3"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]t", "=", 
+   RowBox[{"Parse1", "@", "\"\<[phase_portrait_3](t).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalXi]y", "=", 
+   RowBox[{"Parse3", "@", "\"\<[phase_portrait_3](y).dat\>\""}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalXi]problem", "=", 
+    RowBox[{
+    "ParseProblem", "@", "\"\<[phase_portrait_3](problem).dat\>\""}]}], ";"}],
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]xmin", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "6", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]xmax", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "8", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]ymin", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "10", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]ymax", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "12", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]zmin", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "14", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]zmax", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "16", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]Nx", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "18", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]Ny", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "20", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]Nz", "=", 
+   RowBox[{"ToExpression", "@", 
+    RowBox[{"First", "@", 
+     RowBox[{
+     "\[CapitalXi]problem", "\[LeftDoubleBracket]", "22", 
+      "\[RightDoubleBracket]"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]total", "=", 
+   RowBox[{"\[CapitalPi]Nx", "*", "\[CapitalPi]Ny", "*", "\[CapitalPi]Nz"}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalPi]segsize", "=", 
+   RowBox[{
+    RowBox[{"Length", "@", "\[CapitalXi]t"}], "/", "\[CapitalPi]total"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"EPS", "=", "0.2"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"firstPoints", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+     "\[CapitalXi]y", "\[LeftDoubleBracket]", "k", "\[RightDoubleBracket]"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", "\[CapitalPi]segsize"}],
+       "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"middlePoints", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"\[CapitalXi]y", "\[LeftDoubleBracket]", 
+      RowBox[{"k", ";;", 
+       RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "1"}]}], 
+      "\[RightDoubleBracket]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", "\[CapitalPi]segsize"}],
+       "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"middleColors", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"colorData", "[", 
+        RowBox[{"i", "/", 
+         RowBox[{"Length", "@", 
+          RowBox[{
+          "middlePoints", "\[LeftDoubleBracket]", "k", 
+           "\[RightDoubleBracket]"}]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "@", 
+          RowBox[{
+          "middlePoints", "\[LeftDoubleBracket]", "k", 
+           "\[RightDoubleBracket]"}]}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "1", ",", 
+       RowBox[{"Length", "@", "middlePoints"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lastPoints", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"\[CapitalXi]y", "\[LeftDoubleBracket]", 
+       RowBox[{
+        RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "2"}], ";;", 
+        RowBox[{"k", "+", "\[CapitalPi]segsize", "-", "1"}]}], 
+       "\[RightDoubleBracket]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "1", ",", 
+        RowBox[{"Length", "@", "\[CapitalXi]y"}], ",", 
+        "\[CapitalPi]segsize"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Framed", "@", 
+  "\"\<\:0417\:0430\:0434\:0430\:0447\:0430 3, \:0444\:0430\:0437\:043e\:0432\
+\:044b\:0439 \:043f\:043e\:0440\:0442\:0440\:0435\:0442\>\""}], "\
+\[IndentingNewLine]", 
+ RowBox[{"Column", "[", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ShowInfo", "@", "\[CapitalXi]problem"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Show", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ListPointPlot3D", "[", 
+        RowBox[{"\[CapitalXi]y", ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"\[CapitalPi]xmin", "-", "EPS"}], ",", 
+              RowBox[{"\[CapitalPi]xmax", "+", "EPS"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"\[CapitalPi]ymin", "-", "EPS"}], ",", 
+              RowBox[{"\[CapitalPi]ymax", "+", "EPS"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"\[CapitalPi]zmin", "-", "EPS"}], ",", 
+              RowBox[{"\[CapitalPi]zmax", "+", "EPS"}]}], "}"}]}], "}"}]}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{"BoxStyle", "\[Rule]", "Black"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"TicksStyle", "\[Rule]", "Black"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"LabelStyle", "\[Rule]", 
+          RowBox[{"Directive", "[", 
+           RowBox[{"Black", ",", 
+            RowBox[{"FontFamily", "->", "\"\<Times\>\""}], ",", 
+            "labelFontSize"}], "]"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotStyle", "\[Rule]", "Transparent"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AxesLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{
+             "\"\<\!\(\*SubscriptBox[\(u\), \(1\)]\)\>\"", ",", 
+              "axesFontSize"}], "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{
+             "\"\<\!\(\*SubscriptBox[\(u\), \(2\)]\)\>\"", ",", 
+              "axesFontSize"}], "]"}], ",", 
+            RowBox[{"Style", "[", 
+             RowBox[{
+             "\"\<\!\(\*SubscriptBox[\(u\), \(3\)]\)\>\"", ",", 
+              "axesFontSize"}], "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Graphics3D", "[", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"colorData", "[", "0", "]"}], ",", " ", 
+          RowBox[{"PointSize", "@", "0.006"}], ",", 
+          RowBox[{"Point", "@", "firstPoints"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Thickness", "@", "0.002"}], ",", 
+          RowBox[{"Line", "[", 
+           RowBox[{"middlePoints", ",", 
+            RowBox[{"VertexColors", "\[Rule]", "middleColors"}]}], "]"}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{"colorData", "[", "1", "]"}], ",", 
+          RowBox[{"Arrowheads", "@", "0.015"}], ",", 
+          RowBox[{"Arrow", "@", "lastPoints"}]}], "}"}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", "Center"}]}], "\[IndentingNewLine]", 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.8536032502410955`*^9, 3.853603305937638*^9}, {
+   3.8536033550169706`*^9, 3.8536034837694693`*^9}, {3.853603521999406*^9, 
+   3.8536035550192213`*^9}, {3.8536038181397495`*^9, 3.853603914824815*^9}, {
+   3.8536039486428127`*^9, 3.853603975443544*^9}, {3.8536042014332056`*^9, 
+   3.8536043260588846`*^9}, {3.8536047344630084`*^9, 3.853604788711005*^9}, {
+   3.8536048660043983`*^9, 3.853605020886177*^9}, {3.853605091347742*^9, 
+   3.853605147344775*^9}, {3.8536792789178724`*^9, 3.8536793008344145`*^9}, {
+   3.8536795475484495`*^9, 3.8536795842618604`*^9}, {3.8536950455051165`*^9, 
+   3.8536950642376738`*^9}, {3.853695194388654*^9, 3.8536952182157135`*^9}, {
+   3.8536952483786087`*^9, 3.853695248756117*^9}, {3.853695306111374*^9, 
+   3.853695348747963*^9}, {3.853695433447692*^9, 3.853695459298422*^9}, {
+   3.853754807079198*^9, 3.853754819123886*^9}, {3.8538255984576015`*^9, 
+   3.853825626498205*^9}, {3.8538257081318746`*^9, 3.8538257309221783`*^9}, {
+   3.853836144334791*^9, 3.853836144714813*^9}, {3.853854076490325*^9, 
+   3.8538542320452223`*^9}, {3.8538543234334493`*^9, 
+   3.8538543290357695`*^9}, {3.853854376441481*^9, 3.853854389313217*^9}, {
+   3.853856286358722*^9, 3.853856320276662*^9}, {3.853856496930766*^9, 
+   3.8538564996769233`*^9}, {3.853856728919035*^9, 3.853856776453754*^9}, {
+   3.853858282534897*^9, 3.8538582828809166`*^9}, {3.8538583698048887`*^9, 
+   3.853858438207801*^9}, {3.8538584889907055`*^9, 3.853858502752493*^9}, 
+   3.85385858522621*^9, {3.8538588393747463`*^9, 3.8538592336292963`*^9}, {
+   3.853859299901087*^9, 3.853859325678561*^9}, 3.8538593938564606`*^9, {
+   3.8538595253499823`*^9, 3.853859549982391*^9}, {3.8538596124409633`*^9, 
+   3.8538596855451446`*^9}, {3.853859738577178*^9, 3.853859807380113*^9}, {
+   3.8538598388939157`*^9, 3.8538598547548227`*^9}, {3.853859890094844*^9, 
+   3.8538599224796963`*^9}, {3.8538599880264454`*^9, 3.853860012301834*^9}, {
+   3.8538600825788536`*^9, 3.853860088249178*^9}, {3.85386012937153*^9, 
+   3.8538601490276546`*^9}, {3.8538601922821283`*^9, 3.853860223342905*^9}, {
+   3.8538602586499243`*^9, 3.8538602624141397`*^9}, {3.8538603307720494`*^9, 
+   3.853860342237705*^9}, {3.8538603876103*^9, 3.8538606011215124`*^9}, {
+   3.853860639515709*^9, 3.853860751627121*^9}, {3.8538608306116385`*^9, 
+   3.853860833472802*^9}, {3.853860871750992*^9, 3.8538609279422054`*^9}, {
+   3.853861460268653*^9, 3.853861485061071*^9}, {3.8538652410128994`*^9, 
+   3.853865345497875*^9}, {3.8538653823579836`*^9, 3.853865418101028*^9}, {
+   3.8538658482406306`*^9, 3.853865911960275*^9}, {3.854205817641124*^9, 
+   3.8542059639385643`*^9}, {3.854205996328447*^9, 3.854206301642973*^9}, {
+   3.8542063776574154`*^9, 3.8542063807380075`*^9}, {3.854206444361087*^9, 
+   3.854206530821986*^9}, {3.854206613615599*^9, 3.854206615429769*^9}, {
+   3.854206745785124*^9, 3.854206814448838*^9}, {3.8542076121165514`*^9, 
+   3.8542077192098475`*^9}, 3.854207758921264*^9, {3.8542078154105415`*^9, 
+   3.8542080420758357`*^9}, {3.854208074579661*^9, 3.8542081383537903`*^9}, {
+   3.854208207483592*^9, 3.854208295409664*^9}, {3.854208329508233*^9, 
+   3.854208345572835*^9}, {3.8542084164729013`*^9, 3.8542084278708515`*^9}, {
+   3.8542084791315436`*^9, 3.854208511124037*^9}, {3.8542085479371433`*^9, 
+   3.8542085487410107`*^9}, {3.854208649471506*^9, 3.854208657975203*^9}, {
+   3.854208739322506*^9, 3.8542087405917826`*^9}, {3.85420878467614*^9, 
+   3.8542088025981503`*^9}, {3.8542090715256023`*^9, 
+   3.8542090727179327`*^9}, {3.8542091037345176`*^9, 3.854209124712781*^9}, {
+   3.854209178018241*^9, 3.854209178376592*^9}, {3.8542092133068967`*^9, 
+   3.8542092180255365`*^9}, 3.8542093272315607`*^9, {3.8542093753454065`*^9, 
+   3.854209384958165*^9}, {3.854209419040863*^9, 3.8542094237288003`*^9}, {
+   3.8542095690384474`*^9, 3.8542095734590116`*^9}, {3.854209631105714*^9, 
+   3.8542096406995907`*^9}, {3.8542097179097967`*^9, 3.854209755052889*^9}, {
+   3.854209792172538*^9, 3.8542098183003683`*^9}, {3.854209976351572*^9, 
+   3.854209978646059*^9}, {3.854210012575039*^9, 3.854210202385536*^9}, {
+   3.8542102339794683`*^9, 3.8542102343330855`*^9}, {3.854210725205198*^9, 
+   3.854210870275376*^9}, {3.854210903301117*^9, 3.854210904091773*^9}, {
+   3.8542109724923325`*^9, 3.8542110056169863`*^9}, {3.8542110625951767`*^9, 
+   3.8542111751545973`*^9}, {3.8542112087402077`*^9, 3.854211211667054*^9}, {
+   3.8542112597470922`*^9, 3.8542112629462442`*^9}, {3.854211364268735*^9, 
+   3.854211420464941*^9}, {3.8542765946247125`*^9, 3.85427660593393*^9}, {
+   3.8542766710774918`*^9, 3.85427668732522*^9}, {3.854276731587015*^9, 
+   3.8542767375697684`*^9}, {3.854276820589939*^9, 3.854276822542447*^9}, {
+   3.8542779239859715`*^9, 3.8542779516053443`*^9}, {3.8542780080696497`*^9, 
+   3.8542780376028023`*^9}, {3.8542780726031218`*^9, 3.8542780962827883`*^9}, 
+   3.8542781522610455`*^9, {3.854278227492736*^9, 3.854278243989423*^9}, {
+   3.8542785262990894`*^9, 3.8542785308949327`*^9}, {3.8542786578856*^9, 
+   3.854278663714556*^9}, {3.854279277101054*^9, 3.8542792785867968`*^9}, {
+   3.8542793354382977`*^9, 3.8542793385477314`*^9}, {3.8542793929495354`*^9, 
+   3.854279396733055*^9}, 3.854279440311081*^9, {3.8542794825486317`*^9, 
+   3.8542796723707*^9}, {3.854279752321732*^9, 3.854279803751428*^9}, {
+   3.8542798342419987`*^9, 3.854279861567034*^9}, {3.854279895729746*^9, 
+   3.8542799562721*^9}, {3.854294217250416*^9, 3.8542942375897055`*^9}, {
+   3.8542954730176706`*^9, 3.854295493347603*^9}, {3.854296494685383*^9, 
+   3.854296565896744*^9}, {3.8542968140834327`*^9, 3.854296819161728*^9}, {
+   3.8542968961428194`*^9, 3.8542969760779014`*^9}, {3.8542970128450537`*^9, 
+   3.85429717693704*^9}, {3.8542972097717314`*^9, 3.854297308623803*^9}, {
+   3.8542973606027117`*^9, 3.8542973939206004`*^9}, {3.8542974346087685`*^9, 
+   3.854297445960044*^9}, {3.8542975904583187`*^9, 3.8542976011118717`*^9}, {
+   3.854297662913489*^9, 3.8542976666041965`*^9}, {3.8542977011966515`*^9, 
+   3.854297706511928*^9}, {3.8542977434924936`*^9, 3.854297783325282*^9}, {
+   3.8542988811009054`*^9, 3.8542988950485578`*^9}, {3.854298956838646*^9, 
+   3.8542989764831095`*^9}, {3.8543001780381002`*^9, 3.8543002046758995`*^9}, 
+   3.8543014337662487`*^9, 3.854776518116329*^9, 3.8547765578387146`*^9, {
+   3.8547771990412364`*^9, 3.854777200011983*^9}, {3.8547773189943147`*^9, 
+   3.8547773197295876`*^9}, {3.8547774272023277`*^9, 3.854777428234251*^9}, {
+   3.854777476482691*^9, 3.854777478918456*^9}, {3.8547775371233225`*^9, 
+   3.854777541253117*^9}, 3.855324930761409*^9},
+ CellLabel->
+  "In[250]:=",ExpressionUUID->"627c2fa0-3c1a-4ead-afb9-924fcb7dbc9b"]
+},
+WindowSize->{1141.2, 580.1999999999999},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1.1 Inherited,
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ddc51b38-c9b1-4f6c-8edc-704ec13cfae1"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 54876, 1354, 5708, "Input",ExpressionUUID->"627c2fa0-3c1a-4ead-afb9-924fcb7dbc9b"]
+}
+]
+*)
+
